@@ -6,6 +6,7 @@ body {
 
 .navbar-light {
   background-color: #DBD3D8;
+  border-bottom: 1px solid #D77A61;
 }
 
 
@@ -19,4 +20,13 @@ body {
   background-color: #223843;
   color: white;
   padding: 20px 0;
+}
+
+.site-footer a {
+  color: white;
+}
+
+.site-footer a:hover {
+  color: #D77A61;
+  text-decoration: none;
 }
