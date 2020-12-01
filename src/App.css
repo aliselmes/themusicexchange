@@ -4,6 +4,10 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+.App {
+  background-color: #DBD3D8;
+}
+
 .navbar-light {
   background-color: #DBD3D8;
   border-bottom: 1px solid #D77A61;
@@ -13,8 +17,35 @@ body {
 .navbar h2 {
   color: #D77A61;
   font-family: 'Permanent Marker', cursive;
+  font-size: 1.8rem;
 }
 
+#jumbotron {
+  background-image: url('./images/homejumbotron.jpeg');
+  background-size: cover;
+  background-position: center;
+  color: #D77A61;
+  margin: 25px 0;
+}
+
+#jumbotron-container {
+  background: rgba(0,0,0,0.8);
+  padding: 20px;
+  font-weight: bold;
+}
+
+#jumbotron-container hr {
+  border-top: solid 1px #DBD3D8;
+}
+
+#jumbotron-container button {
+  background-color: #223843;
+  border: none;
+}
+
+#jumbotron-container button:hover {
+  background-color: #D77A61;
+}
 
 .site-footer {
   background-color: #223843;
