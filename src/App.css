@@ -47,6 +47,28 @@ body {
   background-color: #D77A61;
 }
 
+
+#contact-container {
+  margin-top: 25px;
+}
+
+#contact-container h2, #contact-container a {
+  color: #D77A61;
+}
+
+#contact-container h5, address, label {
+  color: #223843;
+}
+
+#contact-container button {
+  background-color: #D77A61;
+  border: none;
+}
+
+#contact-container button:hover {
+  background-color: #223843;
+}
+
 .site-footer {
   background-color: #223843;
   color: white;
