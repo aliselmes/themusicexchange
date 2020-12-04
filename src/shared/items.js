@@ -38,6 +38,46 @@ export const ITEMS = [
         trade: false,
         category: "Pro Audio",
         location: "Minneapolis, MN"
+    },
+    {
+        id: 4,
+        name: "Gibson SG",
+        image: "/assets/images/gibsonsg.jpeg",
+        used: "Fair",
+        price: 800,
+        trade: true,
+        category: "fretted",
+        location: "Cleveland, OH"
+    },
+    {
+        id: 5,
+        name: "Hammond Organ",
+        image: "/assets/images/hammond.jpeg",
+        used: "Good",
+        price: 3000,
+        trade: false,
+        category: "keyboard",
+        location: "Portland, OR"
+    },
+    {
+        id: 6,
+        name: "AC/DC Cassette Tape",
+        image: "/assets/images/acdc.jpeg",
+        used: "Excellent",
+        price: 40,
+        trade: true,
+        category: "music",
+        location: "Denver, CO"
+    },
+    {
+        id: 7,
+        name: "Yamaha Mixing Desk",
+        image: "/assets/images/mixingdesk.jpg",
+        used: "Fair",
+        price: 200,
+        trade: false,
+        category: "Pro Audio",
+        location: "Miami, FL"
     }
 
 ];

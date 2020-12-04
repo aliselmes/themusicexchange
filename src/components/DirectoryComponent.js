@@ -4,7 +4,7 @@ import { Card, CardImg, CardTitle, CardText, CardBody } from 'reactstrap';
 function RenderDirectoryItem({item}) {
     return (
         <Card>
-            <CardImg width="50%" src={item.image} alt={item.name} fluid/>
+            <CardImg height="50%" src={item.image} alt={item.name} img-fluid/>
             <CardBody>
                 <CardTitle>{item.name}</CardTitle>
                 <CardText>

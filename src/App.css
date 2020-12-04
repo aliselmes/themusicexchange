@@ -21,7 +21,7 @@ body {
 }
 
 #jumbotron {
-  background-image: url('./images/homejumbotron.jpeg');
+  background-image: url('homejumbotron.jpeg');
   background-size: cover;
   background-position: center;
   color: #D77A61;
