@@ -20,6 +20,26 @@ body {
   font-size: 1.8rem;
 }
 
+.modal-header {
+  background-color: #223843;
+  color: #EFF1F3;
+  font-family: 'Permanent Marker', cursive;
+}
+
+.modal-body {
+  background-color: #DBD3D8;
+  color: #223843;
+}
+
+.modal-body  button {
+  background-color: #D77A61;
+  border: none;
+}
+
+.modal-body button:hover {
+  background-color: #223843;
+}
+
 #jumbotron {
   background-image: url('homejumbotron.jpeg');
   background-size: cover;
