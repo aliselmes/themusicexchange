@@ -40,33 +40,50 @@ body {
   background-color: #223843;
 }
 
-#jumbotron {
-  background-image: url('homejumbotron.jpeg');
+#buyselltrade {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('homejumbotron.jpeg');
   background-size: cover;
   background-position: center;
+  position: relative;
+}
+
+#musiciansseeking {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('search.jpeg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+#gigs {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('band.jpeg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+#learn {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('learn.jpeg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.jumbotron h1 {
   color: #D77A61;
-  margin: 25px 0;
+  font-size:
 }
 
-#jumbotron-container {
-  background: rgba(0,0,0,0.8);
-  padding: 20px;
-  font-weight: bold;
+.jumbotron p {
+  color: #EFF1F3;
 }
 
-#jumbotron-container hr {
-  border-top: solid 1px #DBD3D8;
-}
-
-#jumbotron-container button {
-  background-color: #223843;
-  border: none;
-}
-
-#jumbotron-container button:hover {
+.jumbotron button {
   background-color: #D77A61;
 }
 
+.jumbotron button:hover {
+  background-color: #223843;
+}
 
 #contact-container {
   margin-top: 25px;
