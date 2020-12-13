@@ -7,7 +7,8 @@ export const ITEMS = [
         price: 400,
         trade: true,
         category: "fretted",
-        location: "Sioux Falls, SD"
+        location: "Sioux Falls, SD",
+        description: "A fantastic beginner guitar with all solid tonewoods. Sounds great plugged in thanks to its quality pickups."
     },
     {
         id: 1,
@@ -17,7 +18,8 @@ export const ITEMS = [
         price: 1000,
         trade: false,
         category: "keyboard",
-        location: "New York, NY"
+        location: "New York, NY",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     },
     {
         id: 2,
@@ -27,7 +29,8 @@ export const ITEMS = [
         price: 25,
         trade: true,
         category: "music",
-        location: "Chicago, Il"
+        location: "Chicago, Il",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     },
     {
         id: 3,
@@ -37,7 +40,8 @@ export const ITEMS = [
         price: 250,
         trade: false,
         category: "Pro Audio",
-        location: "Minneapolis, MN"
+        location: "Minneapolis, MN",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     },
     {
         id: 4,
@@ -47,7 +51,8 @@ export const ITEMS = [
         price: 800,
         trade: true,
         category: "fretted",
-        location: "Cleveland, OH"
+        location: "Cleveland, OH",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     },
     {
         id: 5,
@@ -57,7 +62,8 @@ export const ITEMS = [
         price: 3000,
         trade: false,
         category: "keyboard",
-        location: "Portland, OR"
+        location: "Portland, OR",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     },
     {
         id: 6,
@@ -67,7 +73,8 @@ export const ITEMS = [
         price: 40,
         trade: true,
         category: "music",
-        location: "Denver, CO"
+        location: "Denver, CO",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     },
     {
         id: 7,
@@ -77,7 +84,8 @@ export const ITEMS = [
         price: 200,
         trade: false,
         category: "Pro Audio",
-        location: "Miami, FL"
+        location: "Miami, FL",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     }
 
 ];

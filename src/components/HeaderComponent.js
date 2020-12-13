@@ -40,7 +40,7 @@ class Header extends Component {
         return (
             <React.Fragment>
 
-                <Navbar light sticky="top" expand="lg">
+                <Navbar light sticky="top" expand="xl">
                     <div className="container">
                                     <NavbarBrand className="mr-5" href="/"><h2>The Music Exchange</h2></NavbarBrand>
                                     <NavbarToggler onClick={this.toggleNav} />
@@ -52,8 +52,23 @@ class Header extends Component {
                                                 </NavLink>
                                             </NavItem>
                                             <NavItem>
-                                                <NavLink className="nav-link" to="/directory">
-                                                    Browse
+                                                <NavLink className="nav-link" to="/geardirectory">
+                                                    Browse Gear
+                                                </NavLink>
+                                            </NavItem>
+                                            <NavItem>
+                                                <NavLink className="nav-link" to="/musicians">
+                                                    Find Musicians
+                                                </NavLink>
+                                            </NavItem>
+                                            <NavItem>
+                                                <NavLink className="nav-link" to="/gigs">
+                                                    Gigs
+                                                </NavLink>
+                                            </NavItem>
+                                            <NavItem>
+                                                <NavLink className="nav-link" to="/instructors">
+                                                    Instructors
                                                 </NavLink>
                                             </NavItem>
                                             <NavItem>
@@ -67,7 +82,7 @@ class Header extends Component {
                                                 </NavLink>
                                             </NavItem>
                                             <NavItem>
-                                                <NavLink className="nav-link" to="/signin" onClick={this.toggleModal}>
+                                                <NavLink className="nav-link" to="/" onClick={this.toggleModal}>
                                                     <i className="fa fa-sign-in fa-lg"/> Log In
                                                 </NavLink>
                                             </NavItem>

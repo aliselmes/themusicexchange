@@ -1,15 +1,17 @@
 import React from 'react';
 import { Jumbotron, Container, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
+
+
 const HomeJumbotron = (props) => {
     return (
       <div>
         <div>
           <Jumbotron fluid id="buyselltrade" className="my-4">
             <Container fluid>
-              <h1 className="display-3">Buy. Sell. Trade. <strong>LOCALLY.</strong></h1>
+              <h1 className="display-3">Buy. Sell. Trade. Locally.</h1>
               <p className="lead">Have gear you need to get off your hands? List an item for sale! Or, find musicians in your area with used gear to sell or trade.</p>
-              <Link className="nav-link" to="/directory">
+              <Link className="nav-link" to="/geardirectory">
                 <Button>Browse</Button> 
               </Link>
             </Container>
@@ -43,7 +45,7 @@ const HomeJumbotron = (props) => {
         <div>
           <Jumbotron fluid id="learn" className="my-4">
             <Container fluid>
-              <h1 className="display-3">Learn With a Local Instructor</h1>
+              <h1 className="display-3">Learn With Local Instructors</h1>
               <p className="lead">Find an instructor near you and begin your musical journey!</p>
               <Link className="nav-link" to="/">
                 <Button>Instructors</Button> 

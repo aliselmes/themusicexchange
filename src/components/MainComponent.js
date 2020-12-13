@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Directory from './DirectoryComponent';
+import GearDirectory from './GearDirectoryComponent';
+import GearItemInfo from './GearInfoComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Home from './HomeComponent';
@@ -23,12 +24,19 @@ class Main extends Component {
             );
         };
 
+        const GearItemWithId = ({match}) => {
+            return (
+                <GearItemInfo item={this.state.items.filter(item => item.id === +match.params.itemId)[0]}/>
+            );
+        };
+
         return(
             <div>
                 <Header />
                 <Switch>
                     <Route path='/home' component={HomePage} />
-                    <Route exact path='/directory' render={() => <Directory items={this.state.items}/>}/>
+                    <Route exact path='/geardirectory' render={() => <GearDirectory items={this.state.items}/>}/>
+                    <Route path='/geardirectory/:itemId' component={GearItemWithId} />
                     <Route path='/contactus' component={Contact} />
                     <Redirect to='/home' />
                 </Switch>

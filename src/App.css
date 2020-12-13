@@ -70,7 +70,6 @@ body {
 
 .jumbotron h1 {
   color: #D77A61;
-  font-size:
 }
 
 .jumbotron p {
@@ -82,6 +81,34 @@ body {
 }
 
 .jumbotron button:hover {
+  background-color: #223843;
+}
+
+#directory-card {
+  background-color: #223843;
+  height: 100%;
+}
+
+#directory-card .card-body p {
+  color: #EFF1F3;
+}
+
+#directory-card .card-title {
+  color: #D77A61;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+#item-heading {
+  color: #D77A61;
+  font-weight: bold;
+}
+
+#buy-btn {
+  background-color: #D77A61;
+}
+
+#message-seller-btn, #trade-btn {
   background-color: #223843;
 }
 
