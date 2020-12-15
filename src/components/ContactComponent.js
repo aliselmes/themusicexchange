@@ -18,7 +18,8 @@ class Contact extends Component {
                 lastName: false,
                 phoneNum: false,
                 email: false
-            }
+            },
+            isSubmitted: false
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -81,8 +82,11 @@ class Contact extends Component {
 
     handleSubmit(event) {
         console.log("Current state is: " + JSON.stringify(this.state));
-        alert("Current state is: " + JSON.stringify(this.state));
+        //alert("Current state is: " + JSON.stringify(this.state));
         event.preventDefault();
+        this.setState ({
+            isSubmitted: true
+        });
     }
 
     render() {
@@ -210,6 +214,7 @@ class Contact extends Component {
                                     <Button type="submit" color="primary">
                                         Send Feedback
                                     </Button>
+                                    {this.state.isSubmitted ? <p className="mt-2 text-success">Message Sent!</p> : <div></div>}
                                 </Col>
                             </FormGroup>
                         </Form>

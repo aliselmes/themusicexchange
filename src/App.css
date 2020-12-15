@@ -112,6 +112,14 @@ body {
   background-color: #223843;
 }
 
+#about-component h1, h3 {
+  color: #D77A61;
+}
+
+#about-component h4, p {
+  color: #223843;
+}
+
 #contact-container {
   margin-top: 25px;
 }
