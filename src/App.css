@@ -20,6 +20,14 @@ body {
   font-size: 1.8rem;
 }
 
+.nav-item:hover {
+  border-bottom: 2px solid #D77A61;
+}
+
+button:hover {
+  box-shadow: 0 5px 10px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
+}
+
 .modal-header {
   background-color: #223843;
   color: #EFF1F3;
@@ -87,6 +95,8 @@ body {
 #directory-card {
   background-color: #223843;
   height: 100%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
 #directory-card .card-body p {
@@ -98,6 +108,11 @@ body {
   font-weight: bold;
   font-size: 1.2rem;
 }
+
+#directory-card:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
 
 #item-heading {
   color: #D77A61;
@@ -155,3 +170,5 @@ body {
   color: #D77A61;
   text-decoration: none;
 }
+
+
