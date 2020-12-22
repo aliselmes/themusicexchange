@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Media, ButtonGroup, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
+import { Media, ButtonGroup, Button, Modal, ModalHeader, ModalBody, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Control, LocalForm, Errors } from "react-redux-form";
 
 
 function RenderGearItem({item}) {
@@ -32,13 +33,17 @@ function RenderGearItem({item}) {
     );
 }
 
+const required = val => val && val.length;
+const maxLength = len => val => !val || (val.length <= len);
+const minLength = len => val => val && (val.length >= len);
+const validEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
+
 class GearItemInfo extends Component {
 
     constructor(props) {
         super(props);
 
         this.toggleModal = this.toggleModal.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state = {
@@ -56,56 +61,11 @@ class GearItemInfo extends Component {
 
     }
 
-    validate(yourname, youremail, yourmessage) {
 
-        const errors = {
-            yourname: '',
-            youremail: '',
-            yourmessage: ''
-        };
 
-        if (this.state.touched.yourname) {
-            if (yourname.length < 2) {
-                errors.yourname = 'Your name must be at least 2 characters.';
-            } else if (yourname.length > 25) {
-                errors.yourname = 'Your name must be 25 or less characters.';
-            }
-        }
-
-        if (this.state.touched.youremail && !youremail.includes('@')) {
-            errors.youremail = 'Email should contain a @';
-        }
-
-        if (this.state.touched.yourmessage) {
-            if (yourmessage.length < 20) {
-                errors.yourmessage = 'Message must be at least 20 characters.';
-            } else if (yourmessage.length > 500) {
-                errors.yourmessage = 'Message must be 500 or less characters.';
-            }
-        }
-
-        return errors;
-
-    }
-
-    handleBlur = (field) => () => {
-        this.setState({
-            touched: {...this.state.touched, [field]: true}
-        });
-    }
-
-    handleInputChange(event) {
-        const target = event.target;
-        const name = target.name;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-
-        this.setState({
-            [name]: value
-        });
-    }
-
-    handleSubmit(event) {
-        console.log("Current state is: " + JSON.stringify(this.state));
+    handleSubmit(values) {
+        console.log("Current state is: " + JSON.stringify(values));
+        this.toggleModal();
         {/*alert("Current state is: " + JSON.stringify(this.state));*/}
         this.setState({
             isSubmitted: true
@@ -116,11 +76,10 @@ class GearItemInfo extends Component {
         this.setState({
             isModalOpen: !this.state.isModalOpen
         });
+        console.log(this.state.isModalOpen)
     }
 
     render() {
-
-        const errors = this.validate(this.state.yourname, this.state.youremail, this.state.yourmessage);
 
         return (
             <React.Fragment>
@@ -136,21 +95,15 @@ class GearItemInfo extends Component {
                     }
                     <div className="row">
                         <div className="col">
-                            <ButtonGroup size="lg">
-                                <Link to="/">
-                                    <Button id="buy-btn"><i class="fa fa-dollar"></i> Buy</Button>
-                                </Link>
-                                <Link onClick={this.toggleModal}>
-                                    <Button id="message-seller-btn" className="mx-2"><i class="fa fa-envelope" ></i> Message Seller</Button>
-                                </Link>
-                                {this.props.item.trade ? 
-                                    <Link to="/">
-                                        <Button id="trade-btn"><i class="fa fa-exchange"></i> Trade</Button>
-                                    </Link>
+                                <Button id="buy-btn"><i class="fa fa-dollar"></i> Buy</Button>
+                                             
+                                <Button onClick={this.toggleModal} id="message-seller-btn" className="mx-2"><i class="fa fa-envelope" ></i> Message Seller</Button>
+                               
+                                {this.props.item.trade ?        
+                                <Button className="mt-3 mt-sm-0" id="trade-btn"><i class="fa fa-exchange"></i> Trade</Button>  
                                 :
                                 <div></div>
-                                }
-                            </ButtonGroup>
+                                }   
                         </div>
                     </div>
                     <div className="row">
@@ -170,44 +123,78 @@ class GearItemInfo extends Component {
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                         <ModalHeader toggle={this.toggleModal}>Message Seller</ModalHeader>
                         <ModalBody>
-                            <Form onSubmit={this.handleSubmit}>
-                                <FormGroup >
+                            <LocalForm onSubmit={this.handleSubmit}>
+                                <div className="form-group">
                                     <Label htmlFor="yourname">Your Name</Label>   
-                                    <Input type="text" id="yourname" name="yourname"
+                                    <Control.text model=".yourname" id="yourname" name="yourname"
                                         placeholder="Your Name"
-                                        value={this.state.yourname}
-                                        invalid={errors.yourname}
-                                        onBlur={this.handleBlur("yourname")}
-                                        onChange={this.handleInputChange} />
-                                    <FormFeedback>{errors.yourname}</FormFeedback>    
-                                </FormGroup>
+                                        className="form-control"
+                                        validators={{
+                                            required,
+                                            minLength: minLength(2),
+                                            maxLength: maxLength(20)
+                                        }}
+                                    />
+                                    <Errors
+                                        className="text-danger"
+                                        model=".yourname"
+                                        show="touched"
+                                        component="div"
+                                        messages={{
+                                            minLength: 'Must be at least 2 characters',
+                                            maxLength: 'Must be 20 characters or less'
+                                        }}    
+                                    />   
+                                </div>
 
-                                <FormGroup>
+                                <div className="form-group">
                                     <Label htmlFor="youremail">Your Email</Label>   
-                                        <Input type="text" id="youremail" name="youremail"
+                                        <Control.text model=".youremail" id="youremail" name="youremail"
                                             placeholder="Your Email"
-                                            value={this.state.youremail}
-                                            invalid={errors.youremail}
-                                            onBlur={this.handleBlur("youremail")}
-                                            onChange={this.handleInputChange} />
-                                        <FormFeedback>{errors.youremail}</FormFeedback>  
-                                </FormGroup>
+                                            className="form-control"
+                                            validators={{
+                                                required,
+                                                validEmail
+                                            }}
+                                        />
+                                        <Errors  
+                                        className="text-danger"
+                                        model=".youremail"
+                                        show="touched"
+                                        component="div"
+                                        messages={{
+                                            required: 'Required',
+                                            validEmail: 'Invalid email address'
+                                        }}   
+                                    />   
+                                </div>
 
-                                <FormGroup>
+                                <div className="form-group">
                                     <Label htmlFor="yourmessage">Your Message</Label>
-                                    <Input type="textarea" id="yourmessage" name="yourmessage"
+                                    <Control.textarea model=".yourmessage" id="yourmessage" name="yourmessage"
                                         rows="12"
-                                        value={this.state.yourmessage}
-                                        onChange={this.handleInputChange}
-                                        value={this.state.yourmessage}
-                                        invalid={errors.yourmessage}
-                                        onBlur={this.handleBlur("yourmessage")}
-                                        ></Input>
-                                    <FormFeedback>{errors.yourmessage}</FormFeedback> 
-                                </FormGroup>
+                                        className="form-control"
+                                        validators={{
+                                            required,
+                                            minLength: minLength(20),
+                                            maxLength: maxLength(500)
+                                        }}
+                                    />
+                                    <Errors  
+                                        className="text-danger"
+                                        model=".yourmessage"
+                                        show="touched"
+                                        component="div"
+                                        messages={{
+                                            required: 'Required',
+                                            minLength: 'Must be at least 20 characters',
+                                            maxLength: 'Must be 500 characters or less'
+                                        }}   
+                                    />  
+                                </div>
 
                                 <Button type="submit" value="submit" color="primary">Send</Button>
-                            </Form>
+                            </LocalForm>
                             {this.state.isSubmitted ? <p className="mt-2 text-success">Message Sent!</p> : <div></div>}
                         </ModalBody>
                 </Modal>
