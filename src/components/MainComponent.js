@@ -6,17 +6,17 @@ import Footer from './FooterComponent';
 import Home from './HomeComponent';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import { ITEMS } from '../shared/items';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => {
+    return{
+        items: state.items
+    };
+};
 
 
 class Main extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            items: ITEMS
-        };
-    }
 
     render() {
 
@@ -28,7 +28,7 @@ class Main extends Component {
 
         const GearItemWithId = ({match}) => {
             return (
-                <GearItemInfo item={this.state.items.filter(item => item.id === +match.params.itemId)[0]}/>
+                <GearItemInfo item={this.props.items.filter(item => item.id === +match.params.itemId)[0]}/>
             );
         };
 
@@ -38,7 +38,7 @@ class Main extends Component {
 
                      <Switch>
                         <Route path='/home' component={HomePage} />
-                        <Route exact path='/geardirectory' render={() => <GearDirectory items={this.state.items}/>}/>
+                        <Route exact path='/geardirectory' render={() => <GearDirectory items={this.props.items}/>}/>
                         <Route path='/geardirectory/:itemId' component={GearItemWithId} />
                         <Route path='/aboutus' component={About} />
                         <Route path='/contactus' component={Contact} />
@@ -51,4 +51,4 @@ class Main extends Component {
     }
 }
 
-export default Main;
+export default withRouter(connect(mapStateToProps)(Main));
