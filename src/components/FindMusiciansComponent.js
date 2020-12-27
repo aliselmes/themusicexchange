@@ -45,13 +45,14 @@ class Musicians extends Component {
                 </div>
                 <hr />
                 <div className="row mb-5">
-                    <div className="col col-md-6">
+                    <div className="col-12 col-md-6">
                         <LocalForm>
                             <div className="form-group">
                                 <Label htmlFor="title">Post Title</Label>
                                 <Control.text id="title" name="title"
                                     model=".title"
                                     className="form-control"
+                                    placeholder="Add a Title"
                                     onChange={(e) => this.setState({ postTitle: e.target.value })}
                                     value={this.state.postTitle}
                                 />
@@ -61,6 +62,7 @@ class Musicians extends Component {
                                 <Control.text id="location" name="location"
                                     model=".location"
                                     className="form-control"
+                                    placeholder="e.g. New York, NY"
                                     onChange={(e) => this.setState({ yourLocation: e.target.value })}
                                     value={this.state.yourLocation}
                                 />
@@ -70,6 +72,7 @@ class Musicians extends Component {
                                 <Control.text id="email" name="email"
                                     model=".email"
                                     className="form-control"
+                                    placeholder="e.g. example@example.com"
                                     onChange={(e) => this.setState({ yourEmail: e.target.value })}
                                     value={this.state.yourEmail}
                                 />
@@ -79,6 +82,7 @@ class Musicians extends Component {
                                 <Control.textarea id="post" name="post"
                                     model=".post"
                                     className="form-control"
+                                    placeholder="Type your Message"
                                     rows="5"
                                     onChange={(e) => this.setState({ yourMessage: e.target.value })}
                                     value={this.state.yourMessage}
@@ -87,7 +91,10 @@ class Musicians extends Component {
                             <Button onClick={() => this.handleSubmit()} type="submit" value="submit">Add a Post</Button>
                         </LocalForm>
                     </div>
-                    <div className="col col-md-6 text-right">
+                    <div className="col col-md-2">
+
+                    </div>
+                    <div className="col-12 col-md-4 text-md-right mt-5 mt-md-0">
                         <LocalForm>
                             <div className="form-group">
                                 <Label htmlFor="location">Search your community:</Label>
@@ -99,23 +106,18 @@ class Musicians extends Component {
                             </div>   
                         </LocalForm>
                     </div>
-                </div>
-
-                
-                    
+                </div>                  
                         {filteredItems.map( item =>
                         <div className="row my-3">
                             <div className="col">
-                                <Card body>
+                                <Card body id="musician-card">
                                     <CardTitle tag="h4">{item.title}</CardTitle>
-                                    <CardText>{item.location}, {item.email}</CardText>
+                                    <CardText><strong>{item.location}</strong> - {item.email}</CardText>
                                     <CardText>{item.message}</CardText>
                                 </Card>
                             </div>
                         </div>
-                        )}
-                    
-                
+                        )}                
             </div>
         );
     }

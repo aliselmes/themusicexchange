@@ -2,7 +2,7 @@ import * as ActionTypes from './ActionTypes';
 
 const initialState = {
     musicians: [
-        {title: 'Example', location: 'example location', email: 'example@example.com', message: 'This is an example post, please follow this format when adding a post.'}
+        {title: 'Lead Guitarist Wanted', location: 'Sioux Falls, SD', email: 'example@example.com', message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc fermentum nulla eu nisi tempus, quis ultricies tellus placerat. Curabitur elit nisi, ullamcorper nec placerat sed, suscipit id nisl. Duis mi quam, egestas scelerisque odio sed, gravida tincidunt elit.'}
     ],
 }
 
@@ -15,4 +15,4 @@ export const Musicians = (state = initialState, action) => {
         default:
             return state
     }
-}
+}  
