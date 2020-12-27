@@ -8,9 +8,17 @@ class Musicians extends Component {
 
         this.state={
             postTitle: '',
+            yourLocation: '',
             yourEmail: '',
             yourMessage: ''
         };
+    }
+
+    handleSubmit() {
+        if (this.state.postTitle.length > 0 && this.state.yourLocation.length > 0 && this.state.yourEmail.length > 0 && this.state.yourMessage.length > 0) {
+            this.props.addMusician(this.state.postTitle, this.state.yourLocation, this.state.yourEmail, this.state.yourMessage);
+            this.setState({postTitle: '', yourLocation: '', yourEmail: '', yourMessage: ''})
+        }
     }
 
 
@@ -25,13 +33,24 @@ class Musicians extends Component {
                 </div>
                 <hr />
                 <div className="row mb-5">
-                    <div className="col col-md-4">
+                    <div className="col col-md-6">
                         <LocalForm>
                             <div className="form-group">
                                 <Label htmlFor="title">Post Title</Label>
                                 <Control.text id="title" name="title"
                                     model=".title"
                                     className="form-control"
+                                    onChange={(e) => this.setState({ postTitle: e.target.value })}
+                                    value={this.state.postTitle}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <Label htmlFor="location">Your Location</Label>
+                                <Control.text id="location" name="location"
+                                    model=".location"
+                                    className="form-control"
+                                    onChange={(e) => this.setState({ yourLocation: e.target.value })}
+                                    value={this.state.yourLocation}
                                 />
                             </div>
                             <div className="form-group">
@@ -39,6 +58,8 @@ class Musicians extends Component {
                                 <Control.text id="email" name="email"
                                     model=".email"
                                     className="form-control"
+                                    onChange={(e) => this.setState({ yourEmail: e.target.value })}
+                                    value={this.state.yourEmail}
                                 />
                             </div>
                             <div className="form-group">
@@ -47,9 +68,11 @@ class Musicians extends Component {
                                     model=".post"
                                     className="form-control"
                                     rows="5"
+                                    onChange={(e) => this.setState({ yourMessage: e.target.value })}
+                                    value={this.state.yourMessage}
                                 />
                             </div>
-                            <Button type="submit" value="submit">Add a Post</Button>
+                            <Button onClick={() => this.handleSubmit()} type="submit" value="submit">Add a Post</Button>
                         </LocalForm>
                     </div>
                 </div>
@@ -61,8 +84,7 @@ class Musicians extends Component {
                             <div className="col">
                                 <Card body>
                                     <CardTitle tag="h4">{item.title}</CardTitle>
-                                    <CardText>{item.location}</CardText>
-                                    <CardText>{item.email}</CardText>
+                                    <CardText>{item.location}, {item.email}</CardText>
                                     <CardText>{item.message}</CardText>
                                 </Card>
                             </div>

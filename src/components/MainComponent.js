@@ -9,6 +9,7 @@ import About from './AboutComponent';
 import Musicians from './FindMusiciansComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { addMusician } from '../redux/ActionCreators';
 
 const mapStateToProps = state => {
     return{
@@ -16,6 +17,10 @@ const mapStateToProps = state => {
         musicians: state.Musicians
     };
 };
+
+const mapDispatchToProps = {
+    addMusician
+}
 
 
 class Main extends Component {
@@ -42,7 +47,7 @@ class Main extends Component {
                         <Route path='/home' component={HomePage} />
                         <Route exact path='/geardirectory' render={() => <GearDirectory items={this.props.items}/>}/>
                         <Route path='/geardirectory/:itemId' component={GearItemWithId} />
-                        <Route exact path='/musicians' render={() => <Musicians musicians={this.props.musicians} />} />
+                        <Route exact path='/musicians' render={() => <Musicians musicians={this.props.musicians} addMusician={this.props.addMusician}/>} />
                         <Route path='/aboutus' component={About} />
                         <Route path='/contactus' component={Contact} />
                         <Redirect to='/home' />
@@ -54,4 +59,4 @@ class Main extends Component {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
