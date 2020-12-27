@@ -10,7 +10,8 @@ class Musicians extends Component {
             postTitle: '',
             yourLocation: '',
             yourEmail: '',
-            yourMessage: ''
+            yourMessage: '',
+            search: ''
         };
     }
 
@@ -21,9 +22,20 @@ class Musicians extends Component {
         }
     }
 
+    updateSearch(event) {
+        this.setState({search: event.target.value});
+    }
+
 
     render() {
         console.log(this.props.musicians);
+
+        let filteredItems = this.props.musicians.musicians.filter(
+            (item) => {
+                return item.location.toLowerCase().indexOf(this.state.search.toLowerCase()) !==-1 ;
+            }
+        ) ;
+
         return (
             <div className="container my-5">
                 <div className="row">
@@ -75,11 +87,23 @@ class Musicians extends Component {
                             <Button onClick={() => this.handleSubmit()} type="submit" value="submit">Add a Post</Button>
                         </LocalForm>
                     </div>
+                    <div className="col col-md-6 text-right">
+                        <LocalForm>
+                            <div className="form-group">
+                                <Label htmlFor="location">Search your community:</Label>
+                                <Control.text model=".search" id="search" name="search" placeholder="Enter town/city"
+                                    className="form-control"
+                                    value={this.state.search}
+                                    onChange={this.updateSearch.bind(this)}
+                                />
+                            </div>   
+                        </LocalForm>
+                    </div>
                 </div>
 
                 
                     
-                        {this.props.musicians.musicians.map( item =>
+                        {filteredItems.map( item =>
                         <div className="row my-3">
                             <div className="col">
                                 <Card body>
