@@ -17,8 +17,8 @@ class GearDirectory extends Component {
     }
 
     render() {
-
-        let filteredItems = this.props.items.filter(
+        console.log(this.props.items)
+        let filteredItems = this.props.items.items.filter(
             (item) => {
                 return item.location.toLowerCase().indexOf(this.state.search.toLowerCase()) !==-1 ;
             }

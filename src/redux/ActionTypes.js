@@ -1,0 +1,1 @@
+export const ADD_MUSICIAN_POST = 'ADD_MUSICIAN_POST'

@@ -6,12 +6,14 @@ import Footer from './FooterComponent';
 import Home from './HomeComponent';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
+import Musicians from './FindMusiciansComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
     return{
-        items: state.items
+        items: state.Items,
+        musicians: state.Musicians
     };
 };
 
@@ -28,7 +30,7 @@ class Main extends Component {
 
         const GearItemWithId = ({match}) => {
             return (
-                <GearItemInfo item={this.props.items.filter(item => item.id === +match.params.itemId)[0]}/>
+                <GearItemInfo item={this.props.items.items.filter(item => item.id === +match.params.itemId)[0]}/>
             );
         };
 
@@ -40,6 +42,7 @@ class Main extends Component {
                         <Route path='/home' component={HomePage} />
                         <Route exact path='/geardirectory' render={() => <GearDirectory items={this.props.items}/>}/>
                         <Route path='/geardirectory/:itemId' component={GearItemWithId} />
+                        <Route exact path='/musicians' render={() => <Musicians musicians={this.props.musicians} />} />
                         <Route path='/aboutus' component={About} />
                         <Route path='/contactus' component={Contact} />
                         <Redirect to='/home' />
