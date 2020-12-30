@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Label, Card, CardText, CardTitle } from 'reactstrap';
+import { Button, Label, Card, CardText, CardTitle, UncontrolledCollapse } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 
 class Musicians extends Component {
@@ -46,7 +46,9 @@ class Musicians extends Component {
                 <hr />
                 <div className="row mb-5">
                     <div className="col-12 col-md-6">
-                        <LocalForm>
+                        <Button id="addmusiciantoggler">Click here to add a post</Button>
+                        <UncontrolledCollapse toggler="#addmusiciantoggler">
+                        <LocalForm className="mt-3">
                             <div className="form-group">
                                 <Label htmlFor="title">Post Title</Label>
                                 <Control.text id="title" name="title"
@@ -90,6 +92,7 @@ class Musicians extends Component {
                             </div>
                             <Button onClick={() => this.handleSubmit()} type="submit" value="submit">Add a Post</Button>
                         </LocalForm>
+                        </UncontrolledCollapse>
                     </div>
                     <div className="col col-md-2">
 
@@ -112,7 +115,7 @@ class Musicians extends Component {
                             <div className="col">
                                 <Card body id="musician-card">
                                     <CardTitle tag="h4">{item.title}</CardTitle>
-                                    <CardText><strong>{item.location}</strong> - {item.email}</CardText>
+                                    <CardText><strong>{item.location}</strong> - {item.email}</CardText>     
                                     <CardText>{item.message}</CardText>
                                 </Card>
                             </div>

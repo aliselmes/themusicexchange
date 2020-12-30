@@ -47,7 +47,7 @@ const HomeJumbotron = (props) => {
             <Container fluid>
               <h1 className="display-3">Learn With Local Instructors</h1>
               <p className="lead">Find an instructor near you and begin your musical journey!</p>
-              <Link className="nav-link" to="/">
+              <Link className="nav-link" to="/instructors">
                 <Button>Instructors</Button> 
               </Link>
             </Container>
