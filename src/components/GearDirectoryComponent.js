@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardTitle, CardText, CardBody, Form, FormGroup, Input, Label, Button } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Form, FormGroup, Input, Label,  } from 'reactstrap';
+
 import RenderDirectoryItem from './RenderDirectoryItem';
-import { ITEMS } from '../shared/items';
+
 
 class GearDirectory extends Component {
     constructor(props) {
