@@ -8,6 +8,7 @@ import Contact from './ContactComponent';
 import About from './AboutComponent';
 import Musicians from './FindMusiciansComponent';
 import Instructors from './InstructorsComponent';
+import InstructorInfo from './InstructorInfoComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addMusician } from '../redux/ActionCreators';
@@ -42,6 +43,12 @@ class Main extends Component {
             );
         };
 
+        const InstructorWithId = ({match}) => {
+            return (
+                <InstructorInfo instructor={this.props.instructors.instructors.filter(instructor => instructor.id === +match.params.instructorId)[0]} />
+            );
+        };
+
         return(
             <div>
                 <Header />
@@ -52,6 +59,7 @@ class Main extends Component {
                         <Route path='/geardirectory/:itemId' component={GearItemWithId} />
                         <Route exact path='/musicians' render={() => <Musicians musicians={this.props.musicians} addMusician={this.props.addMusician}/>} />
                         <Route exact path='/instructors' render={() => <Instructors instructors={this.props.instructors}/>} />
+                        <Route path='/instructors/:instructorId' component={InstructorWithId} />
                         <Route path='/aboutus' component={About} />
                         <Route path='/contactus' component={Contact} />
                         <Redirect to='/home' />

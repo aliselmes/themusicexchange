@@ -9,25 +9,25 @@ function RenderGearItem({item}) {
         <div className="col my-5">
             
             <Media>
-            <div className="row">
-                <div className="col-12 col-md-4 mb-4">
-                    <Media left >
-                        <Media object width="100%" src={item.image} alt={item.name} />
-                    </Media>
-                </div>
-                <div className="col-12 col-md-8">
-                    <Media body>
-                        <Media heading id="item-heading">
-                            {item.name}
+                <div className="row">
+                    <div className="col-12 col-md-4 mb-4">
+                        <Media left >
+                            <Media object width="100%" src={item.image} alt={item.name} />
                         </Media>
-                        <p>$ {item.price}</p>
-                        {item.trade ? <p className="text-success">Trades Accepted</p> : <p className="text-danger">No Trades</p> }
-                        <p className="text-muted">Category: {item.category}</p>
-                        <p className="text-muted">Location: {item.location}</p>
-                        <p>{item.description}</p>
-                    </Media>
+                    </div>
+                    <div className="col-12 col-md-8">
+                        <Media body>
+                            <Media heading id="item-heading">
+                                {item.name}
+                            </Media>
+                            <p>$ {item.price}</p>
+                            {item.trade ? <p className="text-success">Trades Accepted</p> : <p className="text-danger">No Trades</p> }
+                            <p className="text-muted">Category: {item.category}</p>
+                            <p className="text-muted">Location: {item.location}</p>
+                            <p>{item.description}</p>
+                        </Media>
+                    </div>
                 </div>
-            </div>
             </Media>
         </div>
     );
