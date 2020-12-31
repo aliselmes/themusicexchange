@@ -9,8 +9,8 @@ function RenderInstructor({item}) {
                 <CardImg width="100%" src={item.image} alt={item.name} img-fluid className="instructor-img"></CardImg>
                 <CardBody>
                     <CardTitle tag="h4" style={{color: "#D77A61"}}>{item.name}</CardTitle>
-                    <CardSubtitle className="mb-1"><strong>{item.instrument}</strong></CardSubtitle>
-                    <CardSubtitle>{item.location}</CardSubtitle>
+                    <CardSubtitle className="mb-1" style={{color: "#223843"}}><strong>{item.instrument}</strong></CardSubtitle>
+                    <CardSubtitle style={{color: "#223843"}}>{item.location}</CardSubtitle>
                 </CardBody>
             </Link>
         </Card>
