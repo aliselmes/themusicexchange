@@ -12,3 +12,18 @@ export const addMusician = (title, location, email, message) => (dispatch) => {
         payload: newMusician
     })
 }
+
+export const addGig = (venue, location, date, time, email, details) => (dispatch) => {
+    const newGig = {
+        venue: venue,
+        location: location,
+        date: date,
+        time: time,
+        email: email,
+        details: details
+    }
+    dispatch({
+        type: ActionTypes.ADD_GIG,
+        payload: newGig
+    })
+}

@@ -9,21 +9,24 @@ import About from './AboutComponent';
 import Musicians from './FindMusiciansComponent';
 import Instructors from './InstructorsComponent';
 import InstructorInfo from './InstructorInfoComponent';
+import Gigs from './FindGigsComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addMusician } from '../redux/ActionCreators';
+import { addMusician, addGig } from '../redux/ActionCreators';
 
 
 const mapStateToProps = state => {
     return{
         items: state.Items,
         musicians: state.Musicians,
-        instructors: state.Instructors
+        instructors: state.Instructors,
+        gigs: state.Gigs
     };
 };
 
 const mapDispatchToProps = {
-    addMusician
+    addMusician,
+    addGig
 }
 
 
@@ -59,9 +62,10 @@ class Main extends Component {
                         <Route path='/geardirectory/:itemId' component={GearItemWithId} />
                         <Route exact path='/musicians' render={() => <Musicians musicians={this.props.musicians} addMusician={this.props.addMusician}/>} />
                         <Route exact path='/instructors' render={() => <Instructors instructors={this.props.instructors}/>} />
+                        <Route exact path='/gigs' render={() => <Gigs gigs={this.props.gigs} addGig={this.props.addGig} />} />
                         <Route path='/instructors/:instructorId' component={InstructorWithId} />
                         <Route path='/aboutus' component={About} />
-                        <Route path='/contactus' component={Contact} />
+                        <Route path='/contactus' component={Contact} />  
                         <Redirect to='/home' />
                     </Switch>
 
