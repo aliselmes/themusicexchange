@@ -12,25 +12,33 @@ import InstructorInfo from './InstructorInfoComponent';
 import Gigs from './FindGigsComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addMusician, addGig } from '../redux/ActionCreators';
+import { fetchMusicians, addGig, loginUser, logoutUser, postMusician } from '../redux/ActionCreators';
 
 
 const mapStateToProps = state => {
     return{
         items: state.Items,
-        musicians: state.Musicians,
+        musicians: state.musicians,
         instructors: state.Instructors,
-        gigs: state.Gigs
+        gigs: state.Gigs,
+        auth: state.auth
     };
 };
 
 const mapDispatchToProps = {
-    addMusician,
-    addGig
+    postMusician: (title, location, email, message) => (postMusician(title, location, email, message)),
+    fetchMusicians: () => (fetchMusicians()),
+    addGig,
+    loginUser: creds => (loginUser(creds)),
+    logoutUser: () => (logoutUser())
 }
 
 
 class Main extends Component {
+
+    componentDidMount() {
+        this.props.fetchMusicians();
+    }
 
     render() {
 
@@ -54,13 +62,16 @@ class Main extends Component {
 
         return(
             <div>
-                <Header />
+                <Header auth={this.props.auth} 
+                    loginUser={this.props.loginUser} 
+                    logoutUser={this.props.logoutUser} 
+                />
 
                      <Switch>
                         <Route path='/home' component={HomePage} />
                         <Route exact path='/geardirectory' render={() => <GearDirectory items={this.props.items}/>}/>
                         <Route path='/geardirectory/:itemId' component={GearItemWithId} />
-                        <Route exact path='/musicians' render={() => <Musicians musicians={this.props.musicians} addMusician={this.props.addMusician}/>} />
+                        <Route exact path='/musicians' render={() => <Musicians musicians={this.props.musicians} postMusician={this.props.postMusician}/>} />
                         <Route exact path='/instructors' render={() => <Instructors instructors={this.props.instructors}/>} />
                         <Route exact path='/gigs' render={() => <Gigs gigs={this.props.gigs} addGig={this.props.addGig} />} />
                         <Route path='/instructors/:instructorId' component={InstructorWithId} />

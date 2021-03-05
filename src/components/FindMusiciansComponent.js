@@ -7,23 +7,28 @@ class Musicians extends Component {
         super(props);
 
         this.state={
-            postTitle: '',
-            yourLocation: '',
-            yourEmail: '',
-            yourMessage: '',
+            //postTitle: '',
+            //yourLocation: '',
+            //yourEmail: '',
+            //yourMessage: '',
             search: ''
         };
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit() {
+    /*handleSubmit() {
         if (this.state.postTitle.length > 0 && this.state.yourLocation.length > 0 && this.state.yourEmail.length > 0 && this.state.yourMessage.length > 0) {
             this.props.addMusician(this.state.postTitle, this.state.yourLocation, this.state.yourEmail, this.state.yourMessage);
             this.setState({postTitle: '', yourLocation: '', yourEmail: '', yourMessage: ''})
         }
+    }*/
+
+    handleSubmit(values) {
+        this.props.postMusician(values.title, values.location, values.email, values.message)
     }
 
     updateSearch(event) {
-        this.setState({search: event.target.value});
+        this.setState({search: event.target.value}); 
     }
 
 
@@ -48,15 +53,15 @@ class Musicians extends Component {
                     <div className="col-12 col-md-6">
                         <Button id="addmusiciantoggler">Click here to add a post</Button>
                         <UncontrolledCollapse toggler="#addmusiciantoggler">
-                        <LocalForm className="mt-3">
+                        <LocalForm className="mt-3" onSubmit={values => this.handleSubmit(values)}>
                             <div className="form-group">
                                 <Label htmlFor="title">Post Title</Label>
                                 <Control.text id="title" name="title"
                                     model=".title"
                                     className="form-control"
                                     placeholder="Add a Title"
-                                    onChange={(e) => this.setState({ postTitle: e.target.value })}
-                                    value={this.state.postTitle}
+                                    //onChange={(e) => this.setState({ postTitle: e.target.value })}
+                                    //value={this.state.postTitle}
                                 />
                             </div>
                             <div className="form-group">
@@ -65,8 +70,8 @@ class Musicians extends Component {
                                     model=".location"
                                     className="form-control"
                                     placeholder="e.g. New York, NY"
-                                    onChange={(e) => this.setState({ yourLocation: e.target.value })}
-                                    value={this.state.yourLocation}
+                                    //onChange={(e) => this.setState({ yourLocation: e.target.value })}
+                                    //value={this.state.yourLocation}
                                 />
                             </div>
                             <div className="form-group">
@@ -75,22 +80,22 @@ class Musicians extends Component {
                                     model=".email"
                                     className="form-control"
                                     placeholder="e.g. example@example.com"
-                                    onChange={(e) => this.setState({ yourEmail: e.target.value })}
-                                    value={this.state.yourEmail}
+                                    //onChange={(e) => this.setState({ yourEmail: e.target.value })}
+                                    //value={this.state.yourEmail}
                                 />
                             </div>
                             <div className="form-group">
-                                <Label htmlFor="post">Your Message</Label>
-                                <Control.textarea id="post" name="post"
-                                    model=".post"
+                                <Label htmlFor="message">Your Message</Label>
+                                <Control.textarea id="message" name="message"
+                                    model=".message"
                                     className="form-control"
                                     placeholder="Type your Message"
                                     rows="5"
-                                    onChange={(e) => this.setState({ yourMessage: e.target.value })}
-                                    value={this.state.yourMessage}
+                                    //onChange={(e) => this.setState({ yourMessage: e.target.value })}
+                                    //value={this.state.yourMessage}
                                 />
                             </div>
-                            <Button onClick={() => this.handleSubmit()} type="submit" value="submit">Add a Post</Button>
+                            <Button /*onClick={() => this.handleSubmit()}*/ type="submit" /*value="submit"*/>Add a Post</Button>
                         </LocalForm>
                         </UncontrolledCollapse>
                     </div>

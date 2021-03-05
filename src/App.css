@@ -5,11 +5,11 @@ body {
 }
 
 .App {
-  background-color: #DBD3D8;
+  background-color: white;
 }
 
 .navbar-light {
-  background-color: #DBD3D8;
+  background-color: white;
   border-bottom: 1px solid #D77A61;
 }
 
@@ -136,7 +136,7 @@ button:hover {
 }
 
 #musician-card, #gig-card {
-  background-color: #DBD3D8;
+  background-color: white;
   border: 1px solid #223843;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
@@ -155,7 +155,7 @@ button:hover {
 }
 
 #instructor-card {
-  background-color: #EFF1F3;
+  background-color: white;
   color: #223843;
   height: 100%;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
