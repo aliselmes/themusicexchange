@@ -18,7 +18,7 @@ export const Musicians = (state = { errMess: null, musicians: []}, action) => {
         case ActionTypes.ADD_MUSICIAN:
             const musician = action.payload
             musician.id = state.musicians.length
-            return { ...state, musicians: state.musicians.concat(musician) }
+            return { ...state, musicians: state.musicians.concat(musician) };
             
         default:
             return state

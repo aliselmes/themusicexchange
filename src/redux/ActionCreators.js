@@ -78,6 +78,38 @@ export const postMusician = (title, location, email, message) => dispatch => {
     });
 };
 
+export const deleteMusician = musicianId => dispatch => {
+
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+
+    return fetch(baseUrl + 'musicians/' + musicianId, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': bearer
+        },
+        credentials: 'same-origin'
+    })
+    .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                const error = new Error(`Error ${response.status}: ${response.statusText}`);
+                error.response = response;
+                throw error;
+            }
+        },
+        error => { throw error; }
+    )
+    .then(response => response.json())
+    .then(musicians => {
+        console.log('Musician Deleted', musicians);
+        dispatch(addMusicians(musicians));
+    })
+    .catch(error => dispatch(musiciansFailed(error.message)));
+};
+
+
+
 
 
 /*export const addMusician = (title, location, email, message) => (dispatch) => {

@@ -12,7 +12,7 @@ import InstructorInfo from './InstructorInfoComponent';
 import Gigs from './FindGigsComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchMusicians, addGig, loginUser, logoutUser, postMusician } from '../redux/ActionCreators';
+import { fetchMusicians, addGig, loginUser, logoutUser, postMusician, deleteMusician } from '../redux/ActionCreators';
 
 
 const mapStateToProps = state => {
@@ -28,6 +28,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     postMusician: (title, location, email, message) => (postMusician(title, location, email, message)),
     fetchMusicians: () => (fetchMusicians()),
+    deleteMusician: (musicianId) => deleteMusician(musicianId),
     addGig,
     loginUser: creds => (loginUser(creds)),
     logoutUser: () => (logoutUser())
@@ -71,7 +72,7 @@ class Main extends Component {
                         <Route path='/home' component={HomePage} />
                         <Route exact path='/geardirectory' render={() => <GearDirectory items={this.props.items}/>}/>
                         <Route path='/geardirectory/:itemId' component={GearItemWithId} />
-                        <Route exact path='/musicians' render={() => <Musicians musicians={this.props.musicians} postMusician={this.props.postMusician}/>} />
+                        <Route exact path='/musicians' render={() => <Musicians musicians={this.props.musicians} postMusician={this.props.postMusician} deleteMusician={this.props.deleteMusician} auth={this.props.auth}/>} />
                         <Route exact path='/instructors' render={() => <Instructors instructors={this.props.instructors}/>} />
                         <Route exact path='/gigs' render={() => <Gigs gigs={this.props.gigs} addGig={this.props.addGig} />} />
                         <Route path='/instructors/:instructorId' component={InstructorWithId} />

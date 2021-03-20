@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Label, Card, CardText, CardTitle, UncontrolledCollapse } from 'reactstrap';
-import { Control, LocalForm, Errors } from 'react-redux-form';
+import { Control, LocalForm } from 'react-redux-form';
+
 
 class Musicians extends Component {
     constructor(props) {
@@ -24,11 +25,15 @@ class Musicians extends Component {
     }*/
 
     handleSubmit(values) {
-        this.props.postMusician(values.title, values.location, values.email, values.message)
+        this.props.postMusician(values.title, values.location, values.email, values.message);
     }
 
     updateSearch(event) {
         this.setState({search: event.target.value}); 
+    }
+
+    handleDelete(musician) {
+        this.props.deleteMusician(musician._id);
     }
 
 
@@ -36,8 +41,8 @@ class Musicians extends Component {
         console.log(this.props.musicians);
 
         let filteredItems = this.props.musicians.musicians.filter(
-            (item) => {
-                return item.location.toLowerCase().indexOf(this.state.search.toLowerCase()) !==-1 ;
+            (musician) => {
+                return musician.location.toLowerCase().indexOf(this.state.search.toLowerCase()) !==-1 ;
             }
         ) ;
 
@@ -50,6 +55,9 @@ class Musicians extends Component {
                 </div>
                 <hr />
                 <div className="row mb-5">
+                    {
+                    this.props.auth.isAuthenticated
+                    ?
                     <div className="col-12 col-md-6">
                         <Button id="addmusiciantoggler">Click here to add a post</Button>
                         <UncontrolledCollapse toggler="#addmusiciantoggler">
@@ -99,10 +107,14 @@ class Musicians extends Component {
                         </LocalForm>
                         </UncontrolledCollapse>
                     </div>
-                    <div className="col col-md-2">
+                    :
+                    <div></div>
+                    }
 
-                    </div>
-                    <div className="col-12 col-md-4 text-md-right mt-5 mt-md-0">
+                    {/*<div className="col col-md-2">
+
+                </div>*/}
+                    <div className="col-12 col-md-4 mt-5 mt-md-0">
                         <LocalForm>
                             <div className="form-group">
                                 <Label htmlFor="location">Search your community:</Label>
@@ -115,13 +127,28 @@ class Musicians extends Component {
                         </LocalForm>
                     </div>
                 </div>                  
-                        {filteredItems.map( item =>
+                        {filteredItems.map( musician =>
                         <div className="row my-3">
                             <div className="col">
                                 <Card body id="musician-card">
-                                    <CardTitle tag="h4">{item.title}</CardTitle>
-                                    <CardText><strong>{item.location}</strong> - {item.email}</CardText>     
-                                    <CardText>{item.message}</CardText>
+                                    <div className="row">
+                                        <div className="col-12 col-md-6">
+                                            <CardTitle tag="h4">{musician.title}</CardTitle>
+                                            <CardText><strong>{musician.location}</strong> - {musician.email}</CardText>     
+                                            <CardText>{musician.message}</CardText>
+                                        </div>
+                                        {
+                                        this.props.auth.isAuthenticated
+                                        ?
+                                        <div className="col-12 col-md-6 mt-3 mt-md-0">
+                                            <Button outline color='danger' onClick={() => this.handleDelete(musician)}>
+                                                Delete <i className='fa fa-times' />
+                                            </Button>
+                                        </div>
+                                        :
+                                        <div></div>
+                                        }
+                                    </div>
                                 </Card>
                             </div>
                         </div>
