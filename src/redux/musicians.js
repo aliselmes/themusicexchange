@@ -17,9 +17,12 @@ export const Musicians = (state = { errMess: null, musicians: []}, action) => {
 
         case ActionTypes.ADD_MUSICIAN:
             const musician = action.payload
-            musician.id = state.musicians.length
+            musician.id = state.musicians.length /* THink about how to generate ID */
             return { ...state, musicians: state.musicians.concat(musician) };
-            
+
+        case ActionTypes.REMOVE_MUSICIAN:
+            return {...state, musicians: state.musicians.filter(musician => musician._id !== action.payload._id)};
+
         default:
             return state
     }

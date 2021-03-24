@@ -38,6 +38,11 @@ export const addMusician = musician => ({
     payload: musician
 });
 
+export const removeMusician = musician => ({
+    type: ActionTypes.REMOVE_MUSICIAN,
+    payload: musician
+});
+
 export const postMusician = (title, location, email, message) => dispatch => {
 
     const newMusician = {
@@ -101,9 +106,9 @@ export const deleteMusician = musicianId => dispatch => {
         error => { throw error; }
     )
     .then(response => response.json())
-    .then(musicians => {
-        console.log('Musician Deleted', musicians);
-        dispatch(addMusicians(musicians));
+    .then(musician => {
+        console.log('Musician Deleted', musician);
+        dispatch(removeMusician(musician));
     })
     .catch(error => dispatch(musiciansFailed(error.message)));
 };

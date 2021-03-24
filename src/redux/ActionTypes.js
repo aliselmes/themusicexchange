@@ -1,6 +1,7 @@
 export const ADD_MUSICIANS = 'ADD_MUSICIANS';
 export const MUSICIANS_FAILED = 'MUSICIANS_FAILED'
 export const ADD_MUSICIAN = 'ADD_MUSICIAN';
+export const REMOVE_MUSICIAN = 'REMOVE_MUSICIAN';
 
 
 export const ADD_GIG = 'ADD_GIG';

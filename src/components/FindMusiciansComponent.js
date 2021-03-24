@@ -138,7 +138,7 @@ class Musicians extends Component {
                                             <CardText>{musician.message}</CardText>
                                         </div>
                                         {
-                                        this.props.auth.isAuthenticated
+                                        this.props.auth.isAuthenticated /*&& log these to check they are equal musician.author.username === this.props.auth.user.username */
                                         ?
                                         <div className="col-12 col-md-6 mt-3 mt-md-0">
                                             <Button outline color='danger' onClick={() => this.handleDelete(musician)}>
