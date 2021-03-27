@@ -3,8 +3,11 @@ export const MUSICIANS_FAILED = 'MUSICIANS_FAILED'
 export const ADD_MUSICIAN = 'ADD_MUSICIAN';
 export const REMOVE_MUSICIAN = 'REMOVE_MUSICIAN';
 
-
+export const ADD_GIGS = 'ADD_GIGS';
+export const GIGS_FAILED = 'GIGS_FAILED';
 export const ADD_GIG = 'ADD_GIG';
+export const REMOVE_GIG = 'REMOVE_GIG';
+
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';

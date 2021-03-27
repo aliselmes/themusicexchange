@@ -12,7 +12,7 @@ import InstructorInfo from './InstructorInfoComponent';
 import Gigs from './FindGigsComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchMusicians, addGig, loginUser, logoutUser, postMusician, deleteMusician } from '../redux/ActionCreators';
+import { fetchMusicians, postMusician, deleteMusician, fetchGigs, postGig, deleteGig, loginUser, logoutUser } from '../redux/ActionCreators';
 
 
 const mapStateToProps = state => {
@@ -29,7 +29,9 @@ const mapDispatchToProps = {
     postMusician: (title, location, email, message) => (postMusician(title, location, email, message)),
     fetchMusicians: () => (fetchMusicians()),
     deleteMusician: (musicianId) => deleteMusician(musicianId),
-    addGig,
+    postGig: (venueName, location, date, time, pay, email, description) => (postGig(venueName, location, date, time, pay, email, description)),
+    fetchGigs: () => (fetchGigs()),
+    deleteGig: (gigId) => deleteGig(gigId),
     loginUser: creds => (loginUser(creds)),
     logoutUser: () => (logoutUser())
 }
@@ -39,6 +41,7 @@ class Main extends Component {
 
     componentDidMount() {
         this.props.fetchMusicians();
+        this.props.fetchGigs();
     }
 
     render() {
@@ -74,7 +77,7 @@ class Main extends Component {
                         <Route path='/geardirectory/:itemId' component={GearItemWithId} />
                         <Route exact path='/musicians' render={() => <Musicians musicians={this.props.musicians} postMusician={this.props.postMusician} deleteMusician={this.props.deleteMusician} auth={this.props.auth}/>} />
                         <Route exact path='/instructors' render={() => <Instructors instructors={this.props.instructors}/>} />
-                        <Route exact path='/gigs' render={() => <Gigs gigs={this.props.gigs} addGig={this.props.addGig} />} />
+                        <Route exact path='/gigs' render={() => <Gigs gigs={this.props.gigs} postGig={this.props.postGig} deleteGig={this.props.deleteGig} auth={this.props.auth}/>} />
                         <Route path='/instructors/:instructorId' component={InstructorWithId} />
                         <Route path='/aboutus' component={About} />
                         <Route path='/contactus' component={Contact} />  
@@ -83,7 +86,7 @@ class Main extends Component {
 
                 <Footer />
             </div>
-        );
+        ); 
     }
 }
 

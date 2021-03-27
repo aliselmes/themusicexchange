@@ -1,7 +1,7 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
 
-
+//Musicians
 export const fetchMusicians = () => dispatch => {
     return fetch(baseUrl + 'musicians')
         .then(response => {
@@ -130,7 +130,9 @@ export const deleteMusician = musicianId => dispatch => {
     })
 } */
 
-export const addGig = (venue, location, date, time, email, details) => (dispatch) => {
+
+//Gigs
+/*export const addGig = (venue, location, date, time, email, details) => (dispatch) => {
     const newGig = {
         venue: venue,
         location: location,
@@ -143,8 +145,125 @@ export const addGig = (venue, location, date, time, email, details) => (dispatch
         type: ActionTypes.ADD_GIG,
         payload: newGig
     })
-}
+}*/
 
+export const fetchGigs = () => dispatch => {
+    return fetch(baseUrl + 'gigs')
+        .then(response => {
+                if (response.ok) {
+                    return response;
+                } else {
+                    const error = new Error(`Error ${response.status}: ${response.statusText}`);
+                    error.response = response;
+                    throw error;
+                }
+            },
+            error => {
+                const errMess = new Error(error.message);
+                throw errMess;
+            }
+        )
+        .then(response => response.json())
+        .then(gigs => dispatch(addGigs(gigs)))
+        .catch(error => dispatch(gigsFailed(error.message)));
+};
+
+export const gigsFailed = errMess => ({
+    type: ActionTypes.GIGS_FAILED,
+    payload: errMess
+});
+
+export const addGigs = gigs => ({
+    type: ActionTypes.ADD_GIGS,
+    payload: gigs
+});
+
+export const addGig = gig => ({
+    type: ActionTypes.ADD_GIG,
+    payload: gig
+});
+
+export const removeGig = gig => ({
+    type: ActionTypes.REMOVE_GIG,
+    payload: gig
+});
+
+export const postGig = (venueName, location, date, time, pay, email, description) => dispatch => {
+
+    const newGig = {
+        venueName: venueName,
+        location: location,
+        date: date,
+        time: time,
+        pay: pay,
+        email: email,
+        description: description
+    }
+    console.log('Gig ', newGig);
+
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+
+    return fetch(baseUrl + 'gigs', {
+        method: 'POST',
+        body: JSON.stringify(newGig),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        },
+        credentials: 'same-origin'
+    })
+    .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                const error = new Error(`Error ${response.status}: ${response.statusText}`);
+                error.response = response;
+                throw error;
+            }
+        },
+        error => { throw error; }
+    )
+    .then(response => response.json())
+    .then(response => dispatch(addGig(response)))
+    .catch(error => {
+        console.log('post gig', error.message);
+        alert('Your gig could not be posted\nError: ' + error.message);
+    });
+};
+
+export const deleteGig = gigId => dispatch => {
+
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+
+    return fetch(baseUrl + 'gigs/' + gigId, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': bearer
+        },
+        credentials: 'same-origin'
+    })
+    .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                const error = new Error(`Error ${response.status}: ${response.statusText}`);
+                error.response = response;
+                throw error;
+            }
+        },
+        error => { throw error; }
+    )
+    .then(response => response.json())
+    .then(gig => {
+        console.log('Gig Deleted', gig);
+        dispatch(removeGig(gig));
+    })
+    .catch(error => dispatch(gigsFailed(error.message)));
+};
+
+
+
+//Login
 export const requestLogin = creds => {
     return {
         type: ActionTypes.LOGIN_REQUEST,

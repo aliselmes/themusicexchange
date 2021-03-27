@@ -7,25 +7,27 @@ class Gigs extends Component {
         super(props);
 
         this.state={
-            venue: '',
-            yourLocation: '',
-            date: '',
-            time: '',
-            yourEmail: '',
-            details: '',
+            //venue: '',
+            //yourLocation: '',
+            //date: '',
+            //time: '',
+            //yourEmail: '',
+            //details: '',
             search: ''
         };
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit() {
-        if (this.state.venue.length > 0 && this.state.yourLocation.length > 0 && this.state.date.length > 0 && this.state.time.length > 0 && this.state.yourEmail.length > 0 && this.state.details.length > 0) {
-            this.props.addGig(this.state.venue, this.state.yourLocation, this.state.date, this.state.time, this.state.yourEmail, this.state.details);
-            this.setState({venue: '', yourLocation: '', date: '', time: '', yourEmail: '', details: ''})
-        }
+    handleSubmit(values) {
+        this.props.postGig(values.venueName, values.location, values.date, values.time, values.pay, values.email, values.description);
     }
 
     updateSearch(event) {
         this.setState({search: event.target.value});
+    }
+
+    handleDelete(gig) {
+        this.props.deleteGig(gig._id);
     }
 
 
@@ -33,8 +35,8 @@ class Gigs extends Component {
         console.log(this.props.gigs);
 
         let filteredItems = this.props.gigs.gigs.filter(
-            (item) => {
-                return item.location.toLowerCase().indexOf(this.state.search.toLowerCase()) !==-1 ;
+            (gig) => {
+                return gig.location.toLowerCase().indexOf(this.state.search.toLowerCase()) !==-1 ;
             }
         ) ;
 
@@ -47,18 +49,21 @@ class Gigs extends Component {
                 </div>
                 <hr />
                 <div className="row mb-5">
+                {
+                    this.props.auth.isAuthenticated
+                    ?
                     <div className="col-12 col-md-6">
                         <Button id="addgigtoggler">Click here to add a gig</Button>
                         <UncontrolledCollapse toggler="#addgigtoggler">
-                        <LocalForm className="mt-3">
+                        <LocalForm className="mt-3" onSubmit={values => this.handleSubmit(values)}>
                             <div className="form-group">
-                                <Label htmlFor="title">Venue</Label>
-                                <Control.text id="venue" name="venue"
-                                    model=".venue"
+                                <Label htmlFor="venueName">Venue</Label>
+                                <Control.text id="venueName" name="venueName"
+                                    model=".venueName"
                                     className="form-control"
                                     placeholder="Venue Name"
-                                    onChange={(e) => this.setState({ venue: e.target.value })}
-                                    value={this.state.venue}
+                                    //onChange={(e) => this.setState({ venue: e.target.value })}
+                                    //value={this.state.venue}
                                 />
                             </div>
                             <div className="form-group">
@@ -67,28 +72,38 @@ class Gigs extends Component {
                                     model=".location"
                                     className="form-control"
                                     placeholder="e.g. New York, NY"
-                                    onChange={(e) => this.setState({ yourLocation: e.target.value })}
-                                    value={this.state.yourLocation}
+                                    //onChange={(e) => this.setState({ yourLocation: e.target.value })}
+                                    //value={this.state.yourLocation}
                                 />
                             </div>
                             <div className="form-group">
-                                <Label htmlFor="gigdate">Date</Label>
-                                <Control.text id="gigdate" name="gigdate"
-                                    model=".gigdate"
+                                <Label htmlFor="date">Date</Label>
+                                <Control.text id="date" name="date"
+                                    model=".date"
                                     className="form-control"
                                     placeholder="e.g. 5/4/21"
-                                    onChange={(e) => this.setState({ date: e.target.value })}
-                                    value={this.state.date}
+                                    //onChange={(e) => this.setState({ date: e.target.value })}
+                                    //value={this.state.date}
                                 />
                             </div>
                             <div className="form-group">
-                                <Label htmlFor="gigtime">Time</Label>
-                                <Control.text id="gigtime" name="gigtime"
-                                    model=".gigtime"
+                                <Label htmlFor="time">Time</Label>
+                                <Control.text id="time" name="time"
+                                    model=".time"
                                     className="form-control"
                                     placeholder="e.g. 19:30"
-                                    onChange={(e) => this.setState({ time: e.target.value })}
-                                    value={this.state.time}
+                                    //onChange={(e) => this.setState({ time: e.target.value })}
+                                    //value={this.state.time}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <Label htmlFor="pay">Pay</Label>
+                                <Control.text id="pay" name="pay"
+                                    model=".pay"
+                                    className="form-control"
+                                    placeholder="e.g. $50"
+                                    //onChange={(e) => this.setState({ time: e.target.value })}
+                                    //value={this.state.time}
                                 />
                             </div>
                             <div className="form-group">
@@ -97,28 +112,31 @@ class Gigs extends Component {
                                     model=".email"
                                     className="form-control"
                                     placeholder="e.g. example@example.com"
-                                    onChange={(e) => this.setState({ yourEmail: e.target.value })}
-                                    value={this.state.yourEmail}
+                                    //onChange={(e) => this.setState({ yourEmail: e.target.value })}
+                                    //value={this.state.yourEmail}
                                 />
                             </div>
                             <div className="form-group">
-                                <Label htmlFor="details">Details</Label>
-                                <Control.textarea id="details" name="details"
-                                    model=".details"
+                                <Label htmlFor="description">Details</Label>
+                                <Control.textarea id="description" name="description"
+                                    model=".description"
                                     className="form-control"
                                     placeholder="Provide details"
                                     rows="5"
-                                    onChange={(e) => this.setState({ details: e.target.value })}
-                                    value={this.state.details}
+                                    //onChange={(e) => this.setState({ details: e.target.value })}
+                                    //value={this.state.details}
                                 />
                             </div>
-                            <Button onClick={() => this.handleSubmit()} type="submit" value="submit">Add Gig</Button>
+                            <Button type="submit">Add Gig</Button>
                         </LocalForm>
                         </UncontrolledCollapse>
                     </div>
-                    <div className="col col-md-2">
+                    :
+                    <div></div>
+                }
+                    {/*<div className="col col-md-2">
 
-                    </div>
+                    </div>*/}
                     <div className="col-12 col-md-4 text-md-right mt-5 mt-md-0">
                         <LocalForm>
                             <div className="form-group">
@@ -132,14 +150,30 @@ class Gigs extends Component {
                         </LocalForm>
                     </div>
                 </div>                  
-                        {filteredItems.map( item =>
+                        {filteredItems.map( gig =>
                         <div className="row my-3">
                             <div className="col">
                                 <Card body id="gig-card">
-                                    <CardTitle tag="h4">{item.venue}</CardTitle>
-                                    <CardText><strong>{item.location}</strong> - {item.date} - {item.time}</CardText> 
-                                    <CardText>{item.email}</CardText>    
-                                    <CardText>{item.details}</CardText>
+                                    <div className="row">
+                                        <div className="col-12 col-md-6">
+                                            <CardTitle tag="h4">{gig.venueName}</CardTitle>
+                                            <CardText><strong>{gig.location}</strong> - {gig.date} - {gig.time}</CardText> 
+                                            <CardText>${gig.pay}</CardText> 
+                                            <CardText>{gig.email}</CardText>    
+                                            <CardText>{gig.description}</CardText>
+                                        </div>
+                                        {
+                                        this.props.auth.isAuthenticated /*&& log these to check they are equal musician.author.username === this.props.auth.user.username */
+                                        ?
+                                        <div className="col-12 col-md-6 mt-3 mt-md-0">
+                                            <Button outline color='danger' onClick={() => this.handleDelete(gig)}>
+                                                Delete <i className='fa fa-times' />
+                                            </Button>
+                                        </div>
+                                        :
+                                        <div></div>
+                                        }
+                                    </div>
                                 </Card>
                             </div>
                         </div>
